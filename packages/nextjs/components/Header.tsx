@@ -4,13 +4,19 @@ import React, { useCallback, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bars3Icon, BugAntIcon, PhotoIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  BugAntIcon,
+  CircleStackIcon,
+  InboxStackIcon,
+} from "@heroicons/react/24/outline";
 import { useOutsideClick } from "~~/hooks/scaffold-stark";
 import { CustomConnectButton } from "~~/components/scaffold-stark/CustomConnectButton";
 import { useTheme } from "next-themes";
 import { useTargetNetwork } from "~~/hooks/scaffold-stark/useTargetNetwork";
 import { devnet } from "@starknet-react/chains";
 import { SwitchTheme } from "./SwitchTheme";
+import { useAccount, useProvider } from "@starknet-react/core";
 
 export type HeaderMenuLink = {
   label: string;
@@ -20,9 +26,18 @@ export type HeaderMenuLink = {
 
 export const menuLinks: HeaderMenuLink[] = [
   {
-    label: "Example View 1",
-    href: "/exampleView1",
-    icon: <PhotoIcon className="h-4 w-4" />,
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Staker UI",
+    href: "/stake-ui",
+    icon: <CircleStackIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Stake Events",
+    href: "/stakings",
+    icon: <InboxStackIcon className="h-4 w-4" />,
   },
   {
     label: "Debug Contracts",
@@ -39,6 +54,7 @@ export const HeaderMenuLinks = () => {
   useEffect(() => {
     setIsDark(theme === "dark");
   }, [theme]);
+
   return (
     <>
       {menuLinks.map(({ label, href, icon }) => {
@@ -77,6 +93,23 @@ export const Header = () => {
   );
   const { targetNetwork } = useTargetNetwork();
   const isLocalNetwork = targetNetwork.id === devnet.id;
+  const { provider } = useProvider();
+  const { address, status } = useAccount();
+  const [isDeployed, setIsDeployed] = useState(true);
+
+  useEffect(() => {
+    if (status === "connected" && address) {
+      provider
+        .getContractVersion(address)
+        .then((v) => {
+          if (v) setIsDeployed(true);
+        })
+        .catch((e) => {
+          console.log(e);
+          setIsDeployed(false);
+        });
+    }
+  }, [status, address, provider]);
 
   return (
     <div className="sticky lg:static top-0 navbar min-h-0 flex-shrink-0 justify-between z-20 px-0 sm:px-2">
@@ -128,8 +161,12 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4 gap-4">
+        {status === "connected" && !isDeployed ? (
+          <span className="bg-[#8a45fc] text-[9px] p-1 text-white">
+            Wallet Not Deployed
+          </span>
+        ) : null}
         <CustomConnectButton />
-        {/* <FaucetButton /> */}
         <SwitchTheme
           className={`pointer-events-auto ${
             isLocalNetwork ? "self-end md:self-auto" : ""

@@ -8,7 +8,6 @@ interface MenuItemProps {
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({ link, isActive }) => {
-  //console.log({ isActive }, link.label);
   return (
     <li key={link.href}>
       <Link
@@ -16,7 +15,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, isActive }) => {
         passHref
         className={`${
           isActive
-            ? "!bg-base-300 !text-base-100 active:bg-base-300 shadow-md text-base-100"
+            ? "!bg-base-300 !text-base-100 active:bg-base-300 shadow-md "
             : ""
         } hover:bg-base-300 hover:text-base-100`}
       >
