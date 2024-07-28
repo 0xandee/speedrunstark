@@ -5,12 +5,9 @@ import { Address } from "~~/components/scaffold-stark";
 import { useScaffoldEventHistory } from "~~/hooks/scaffold-stark/useScaffoldEventHistory";
 
 const Transfers: NextPage = () => {
-  const { data: transferEvents, isLoading } = useScaffoldEventHistory({
-    contractName: "YourCollectible",
-    eventName: "openzeppelin::token::erc721::erc721::ERC721Component::Transfer",
-    fromBlock: 0n,
-    watch: true,
-  });
+  // #TODO-4: write fetch transfer history function
+  const transferEvents = [];
+  const isLoading = false;
 
   //console.log(transferEvents)
   if (isLoading)

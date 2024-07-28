@@ -7,11 +7,8 @@ import { useScaffoldWriteContract } from "~~/hooks/scaffold-stark/useScaffoldWri
 export const NFTCard = ({ nft }: { nft: Collectible }) => {
   const [transferToAddress, setTransferToAddress] = useState("");
 
-  const { writeAsync: transferNFT } = useScaffoldWriteContract({
-    contractName: "YourCollectible",
-    functionName: "transfer_from",
-    args: [nft.owner, transferToAddress, BigInt(nft.id.toString())],
-  });
+  // #TODO-3 add transfer function
+  const transferNFT = async () => {};
 
   const wrapInTryCatch =
     (fn: () => Promise<any>, errorMessageFnDescription: string) => async () => {

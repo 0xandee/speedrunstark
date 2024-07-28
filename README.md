@@ -41,6 +41,7 @@ yarn install
 
 ```bash
 gh repo clone 0xSpaceShard/starknet-devnet-rs
+cd starknet-devnet-rs
 cargo run
 ```
 
@@ -54,7 +55,7 @@ yarn deploy
 > in a third terminal window, start your 📱 frontend:
 
 ```sh
-cd nextjs
+cd packages/nextjs
 yarn dev
 ```
 
@@ -62,47 +63,9 @@ yarn dev
 
 ---
 
-## Checkpoint 1: ⛽️ Gas & Wallets 👛
+## Checkpoint 0: 💾 Deploy your contract! 🛰
 
-> 🔥 We'll use burner wallets on localhost.
-
-> 👛 Explore how burner wallets work in 🏗 Scaffold-Stark. You will notice the `Connect Wallet` button on the top right corner. After click it, you can choose the `Burner Wallet` option. You will get a default prefunded account.
-
-## ![wallet](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/simple-nft-example/packages/nextjs/public/ch0-wallet.png)
-
-## Checkpoint 2: 🖨 Minting
-
-> ✏️ Mint some NFTs! Click the **MINT NFT** button in the `My NFTs` tab.
-
-![image](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/simple-nft-example/packages/nextjs/public/ch0-mynft.png)
-
-👀 You should see your NFTs start to show up:
-
-![image](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/simple-nft-example/packages/nextjs/public/ch0-nfts-images.png)
-
-👛 Open an window Browser and navigate to <http://localhost:3000>
-
-🎟 Transfer an NFT from one address to another using the UI:
-
-![image](https://github.com/Quantum3-Labs/speedrunstark/blob/simple-nft-example/packages/nextjs/public/ch0-nfts-images-transfer.png?raw=true)
-
-👛 Try to mint an NFT from a different address.
-
-🕵🏻‍♂️ Inspect the `Debug Contracts` tab to figure out what address is the owner of YourCollectible?
-
-🔏 You can also check out your smart contract `YourCollectible.cairo` in `packages/snfoundry/contracts`.
-
-💼 Take a quick look at your deploy script `deploy.ts` in `packages/snfoundry/script-ts`.
-
-📝 If you want to edit the frontend, navigate to `packages/nextjs/app` and open the specific page you want to modify. For instance: `/myNFTs/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-
----
-
-## Checkpoint 3: 💾 Deploy your contract! 🛰
-
-🛰 Ready to deploy to a public testnet?!?
-
-> Change the defaultNetwork in `packages/nextjs/scaffold.config.ts` to `sepolia`.
+🛰 Ready to deploy to a devnet?
 
 ![chall-0-scaffold-config](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/simple-nft-example/packages/nextjs/public/ch0-scaffold-config.png)
 
@@ -112,59 +75,50 @@ yarn dev
 cp packages/snfoundry/.env.example packages/snfoundry/.env
 ```
 
-> You need to fill the env variables related to Sepolia testnet with your own contract address and private key.
-
-⛽️ You will need to send ETH or STRK to your deployer Contract Addres with your wallet, or get it from a public faucet of your chosen network.
-
-> Some popular faucets are [Starknet Faucet](https://starknet-faucet.vercel.app/) and [Blastapi Starknet Sepolia Eth](https://blastapi.io/faucets/starknet-sepolia-eth)
+> You need to fill the env variables related to devnet with your own contract address and private key.
 
 🚀 Deploy your NFT smart contract with `yarn deploy`.
 
-> you input `yarn deploy --network sepolia`.
+> you input `yarn deploy`.
+
+🔏 You can also check out your smart contract `YourCollectible.cairo` in `packages/snfoundry/contracts`.
+
+💼 Take a quick look at your deploy script `deploy.ts` in `packages/snfoundry/script-ts`.
+
+## Checkpoint 1: ⛽️ Gas & Wallets 👛
+
+> 🔥 We'll use burner wallets on localhost.
+
+> 👛 Explore how burner wallets work in 🏗 Scaffold-Stark. You will notice the `Connect Wallet` button on the top right corner. After click it, you can choose the `Burner Wallet` option. You will get a default pre-funded account.
+
+## ![wallet](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/simple-nft-example/packages/nextjs/public/ch0-wallet.png)
+
+## Checkpoint 2: 🖨 Minting
+
+> ✏️ Write mint function! #TODO-1
+✨ Mint some NFTs! Click the **MINT NFT** button in the `My NFTs` tab.
+
+![image](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/simple-nft-example/packages/nextjs/public/ch0-mynft.png)
+
+## Checkpoint 3: 💰 NFT Balance
+
+> ✏️ Write get balance function! #TODO-2
+👀 You should see your NFTs start to show up:
+
+![image](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/simple-nft-example/packages/nextjs/public/ch0-nfts-images.png)
+
+## Checkpoint 4: 🎟 Transfer
+
+> ✏️ Write transfer function! #TODO-3
+🎟 Transfer an NFT from one address to another using the UI:
+
+![image](https://github.com/Quantum3-Labs/speedrunstark/blob/simple-nft-example/packages/nextjs/public/ch0-nfts-images-transfer.png?raw=true)
+
+## Checkpoint 5: 🕵🏻‍♂️ Transfer History
+
+> ✏️ Write fetch transfer history function! #TODO-4
+🔎 You can see the transfer history of the NFT contract in the `Transfers` tab.
+
+![image](https://private-user-images.githubusercontent.com/34095856/352816441-b5a0e3b2-85ea-4049-8186-88cee7af635b.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjIxNzQ1MDUsIm5iZiI6MTcyMjE3NDIwNSwicGF0aCI6Ii8zNDA5NTg1Ni8zNTI4MTY0NDEtYjVhMGUzYjItODVlYS00MDQ5LTgxODYtODhjZWU3YWY2MzViLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA3MjglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNzI4VDEzNDMyNVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQwNDliODRhZmI3OTQzYWUwMjcxYmRhOGY3ZjM5MWZmNzUzMjU5Y2ZlNWI2NjUyZTliNGIyNzhmZTZjMGMxOTgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.e1jkRBZrZgmHQ0-AeH0OAzu-mVxHNMS9YQNpE79RYio)
 
 ---
-
-## Checkpoint 4: 🚢 Ship your frontend! 🚁
-
-> 🦊 Since we have deployed to a public testnet, you will now need to connect using a wallet you own(Argent X or Braavos).
-
-![connect-wallet](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/gabi/simple-nft-example/packages/nextjs/public/ch0-wallet.png)
-
-> You should see the correct network in the frontend (<http://localhost:3000>):
-
-![image](https://raw.githubusercontent.com/Quantum3-Labs/speedrunstark/simple-nft-example/packages/nextjs/public/ch0-balance.png)
-
-> 💬 Hint: For faster loading of your transfer page, consider updating the `fromBlock` passed to `useScaffoldEventHistory` in [`packages/nextjs/app/transfers/page.tsx`](https://github.com/Quantum3-Labs/scaffold-stark-2/blob/main/packages/nextjs/hooks/scaffold-stark/useScaffoldEventHistory.ts) to `blocknumber - 10` at which your contract was deployed. Example: `fromBlock: 3750241n` (where `n` represents its a [BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)). To find this blocknumber, search your contract's address on Starkscan and find the `Contract Creation` transaction line.
-
-🚀 Deploy your NextJS App
-
-```shell
-yarn vercel
-```
-
-> Follow the steps to deploy to Vercel. Once you log in (email, github, etc), the default options should work. It'll give you a public URL.
-
-> If you want to redeploy to the same production URL you can run `yarn vercel --prod`. If you omit the `--prod` flag it will deploy it to a preview/test URL.
-
-⚠️ Run the automated testing function to make sure your app passes
-
-```shell
-yarn test
-```
-
-#### Configuration of Third-Party Services for Production-Grade Apps
-
-By default, 🏗 Scaffold-Stark provides predefined API keys for some services such as Infura. This allows you to begin developing and testing your applications more easily, avoiding the need to register for these services.
-This is great to complete your **SpeedRunStark**.
-
-For production-grade applications, it's recommended to obtain your own API keys (to prevent rate limiting issues). You can configure these at:
-
-🔷 `RPC_URL_SEPOLIA` variable in `packages/snfoundry/.env` and `packages/nextjs/.env.local`. You can create API keys from the [Infura dashboard](https://www.infura.io/).
-
-> 💬 Hint: It's recommended to store env's for nextjs in Vercel/system env config for live apps and use .env.local for local testing.
-
----
-
-> 🏃 Head to your next challenge [here](https://www.speedrunstark.com/challenge/decentralized-staking).
-
-> 💭 Problems, questions, comments on the stack? Post them to the [🏗 Scaffold-Stark developers chat](https://t.me/+wO3PtlRAreo4MDI9)

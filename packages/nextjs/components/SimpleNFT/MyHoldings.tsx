@@ -28,12 +28,9 @@ export const MyHoldings = ({
   const { data: yourCollectibleContract } = useScaffoldContract({
     contractName: "YourCollectible",
   });
-
-  const { data: myTotalBalance } = useScaffoldReadContract({
-    contractName: "YourCollectible",
-    functionName: "balance_of",
-    args: [connectedAddress ?? ""],
-  });
+  
+  // #TODO-2: write get balance function
+  const myTotalBalance = 0;
 
   useEffect(() => {
     const updateMyCollectibles = async (): Promise<void> => {
