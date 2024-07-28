@@ -37,24 +37,25 @@ git checkout simple-nft-example
 yarn install
 ```
 
-> in the same terminal, start your local network (a local instance of a blockchain):
+> in the same terminal, install a Starknet devnet and start your local network (a local instance of a blockchain):
 
 ```bash
-yarn chain
+gh repo clone 0xSpaceShard/starknet-devnet-rs
+cargo run
 ```
 
 > in a second terminal window, 🛰 deploy your contract (locally):
 
 ```sh
-cd simple-nft-example
+cd packages/snfoundry
 yarn deploy
 ```
 
 > in a third terminal window, start your 📱 frontend:
 
 ```sh
-cd simple-nft-example
-yarn start
+cd nextjs
+yarn dev
 ```
 
 📱 Open [http://localhost:3000](http://localhost:3000) to see the app.
